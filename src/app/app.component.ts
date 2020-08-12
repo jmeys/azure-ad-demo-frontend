@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {AuthConfig, OAuthService} from 'angular-oauth2-oidc';
-import {filter, tap} from 'rxjs/operators';
+import {OAuthService} from 'angular-oauth2-oidc';
+import {authConfig} from './auth.config';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +9,12 @@ import {filter, tap} from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'Tour of Heroes';
+
+  constructor(private oauthService: OAuthService) {
+    this.oauthService.configure(authConfig);
+    this.oauthService.loadDiscoveryDocumentAndLogin();
+
+    this.oauthService.setupAutomaticSilentRefresh();
+  }
+
 }

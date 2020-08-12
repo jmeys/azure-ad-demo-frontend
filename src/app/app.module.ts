@@ -11,6 +11,7 @@ import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
 import { HeroesComponent }      from './heroes/heroes.component';
 import { HeroSearchComponent }  from './hero-search/hero-search.component';
 import { MessagesComponent }    from './messages/messages.component';
+import {OAuthModule} from 'angular-oauth2-oidc';
 
 @NgModule({
   imports: [
@@ -18,6 +19,12 @@ import { MessagesComponent }    from './messages/messages.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: ['http://localhost:8080/api'],
+        sendAccessToken: true
+      }
+    }),
   ],
   declarations: [
     AppComponent,
